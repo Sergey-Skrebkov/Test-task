@@ -16,26 +16,46 @@
 docker-compose up
 ```
 
-### Для выполнения запроса обратитесь на адрес 
-```
+### Для выполнения запроса обратитесь на адрес методом POST
+```http request
 http://localhost:8080/documents/checkDocument
 ```
 В теле запроса добавьте JSON
 ```json
 {
-    "tags" : [
-        {
-            "tag" : "A",
-            "count" : 2
-        },
-        {
-            "tag" : "B",
-            "count" : 2
-        },
-                {
-            "tag" : "C",
-            "count" : 6
-        }
+  "document" :{
+    "products" : [
+      {
+        "name" : "Товар1",
+        "count" : 6,
+        "tags" : ["C"]
+      },
+      {
+        "name" : "Товар2",
+        "count" : 2,
+        "tags" : ["B","A"]
+      },
+      {
+        "name" : "Товар1",
+        "count" : 3,
+        "tags" : ["A"]
+      }
     ]
+  },
+
+  "tags" : [
+    {
+      "tag" : "A",
+      "count" : 2
+    },
+    {
+      "tag" : "B",
+      "count" : 2
+    },
+    {
+      "tag" : "C",
+      "count" : 6
+    }
+  ]
 }
 ```

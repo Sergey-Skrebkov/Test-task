@@ -14,4 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CheckTagsInDocumentDto {
     private List<OneTagForCheckDto> tags;
+
+    private DocumentDto document;
 }

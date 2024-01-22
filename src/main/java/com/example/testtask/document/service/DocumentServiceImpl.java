@@ -1,7 +1,11 @@
 package com.example.testtask.document.service;
 
-import com.example.testtask.document.controller.dto.*;
-import com.example.testtask.document.store.DocumentStore;
+import com.example.testtask.document.controller.dto.AnswerOnCheckDocumentDto;
+import com.example.testtask.document.controller.dto.CheckTagsInDocumentDto;
+import com.example.testtask.document.controller.dto.DocumentDto;
+import com.example.testtask.document.controller.dto.OnePositionInAnswerDto;
+import com.example.testtask.document.controller.dto.OneTagForCheckDto;
+import com.example.testtask.document.controller.dto.ProductDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +31,7 @@ public class DocumentServiceImpl implements DocumentService {
         var permutationsTags = generatePermutationsTagsList(checkTagsInDocumentDto.getTags());
 
         for (var tags : permutationsTags) {
-            var answerTable = fillAnswerTable(tags.toArray(new OneTagForCheckDto[0]));
+            var answerTable = fillAnswerTable(tags.toArray(new OneTagForCheckDto[0]), checkTagsInDocumentDto.getDocument());
             if (answerTable != null) {
                 answer.setAnswerTable(new ArrayList<>(answerTable));
                 break;
@@ -47,9 +51,8 @@ public class DocumentServiceImpl implements DocumentService {
      * @param checkTags метки для поиска в документе
      * @return таблица с позициями и количеством товаров с меткой
      */
-    private List<OnePositionInAnswerDto> fillAnswerTable(OneTagForCheckDto[] checkTags) {
-        var products =
-                DocumentStore.getInstance().getDocument().getProducts().toArray(new ProductDto[0]);
+    private List<OnePositionInAnswerDto> fillAnswerTable(OneTagForCheckDto[] checkTags, DocumentDto document) {
+        var products = document.getProducts().toArray(new ProductDto[0]);
         products = deapCopy(products);
         checkTags = deapCopy(checkTags);
         var answerTable = new ArrayList<OnePositionInAnswerDto>();

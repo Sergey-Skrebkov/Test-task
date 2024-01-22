@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductDto implements Serializable {
 
-    private String Name;
+    private String name;
 
     private Long count;
 
